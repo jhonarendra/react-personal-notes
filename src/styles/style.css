@@ -56,8 +56,16 @@ header h1 {
 
 header .navigation ul li {
   display: inline-block;
-  font-size: 24px;
+  font-size: 18px;
   margin: 0 8px;
+}
+
+header .navigation ul li button {
+  font-size: 18px;
+  background: transparent;
+  color: var(--on-background);
+  cursor: pointer;
+  border: 0;
 }
 
 main {

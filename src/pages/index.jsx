@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import HomepageAction from '../components/index/HomePageAction'
 
 export default function IndexPage() {
   return (
@@ -21,6 +22,7 @@ export default function IndexPage() {
           </p>
         </article>
       </section>
+      <HomepageAction />
     </section>
   )
 }

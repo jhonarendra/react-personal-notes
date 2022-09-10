@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Link, Navigate, Route, Routes
 } from 'react-router-dom'
@@ -8,8 +8,26 @@ import NotFoundPages from './pages/not-found'
 import ArchivesPage from './pages/archives'
 import NotesIdPages from './pages/notes/_id'
 import NotesNewPages from './pages/notes/new'
+import { capitalizeFirstLetter } from './utils'
 
 function App() {
+  const [theme, setTheme] = useState('dark')
+
+  const changeTheme = (val) => {
+    setTheme(val)
+    const root = window.document.documentElement
+    root.setAttribute('data-theme', val)
+    localStorage.setItem('theme', val)
+  }
+
+  useEffect(() => {
+    if (localStorage.theme) {
+      changeTheme(localStorage.theme)
+    } else {
+      localStorage.setItem('theme', 'dark')
+      changeTheme('dark')
+    }
+  }, [])
   return (
     <div className="app-container">
       <header>
@@ -19,6 +37,13 @@ function App() {
         <nav className="navigation">
           <ul>
             <li><Link to="/archives" title="Archives">Arsip</Link></li>
+            <li>
+              <button type="button" onClick={() => changeTheme(theme === 'dark' ? 'light' : 'dark')}>
+                {capitalizeFirstLetter(theme)}
+                {' '}
+                Theme
+              </button>
+            </li>
           </ul>
         </nav>
       </header>

@@ -10,4 +10,8 @@ const showFormattedDate = (date) => {
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
-export { showFormattedDate, capitalizeFirstLetter }
+const extractContent = (html) => new DOMParser()
+  .parseFromString(html, 'text/html')
+  .documentElement.textContent
+
+export { showFormattedDate, capitalizeFirstLetter, extractContent }

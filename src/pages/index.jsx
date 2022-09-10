@@ -1,27 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import HomepageAction from '../components/index/HomePageAction'
+import NotesList from '../components/notes/NotesList'
+import { getAllNotes } from '../utils/local-data'
 
 export default function IndexPage() {
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+    setNotes(getAllNotes())
+  }, [])
+
   return (
     <section className="homepage">
       <h2>Catatan Aktif</h2>
       <section className="search-bar">
         <input type="text" placeholder="Cari berdasarkan judul ..." value="" />
       </section>
-      <section className="notes-list">
-        <article className="note-item">
-          <h3 className="note-item__title">
-            <Link to="/" title="/">Title</Link>
-          </h3>
-          <p className="note-item__createdAt">
-            Kamis, 14 April 2022
-          </p>
-          <p className="note-item__body">
-            Body/.
-          </p>
-        </article>
-      </section>
+      <NotesList notes={notes} />
       <HomepageAction />
     </section>
   )

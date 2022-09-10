@@ -8,7 +8,7 @@ import NotFoundPages from './pages/not-found'
 import ArchivesPage from './pages/archives'
 import NotesIdPages from './pages/notes/_id'
 import NotesNewPages from './pages/notes/new'
-import NavHeader from './components/layout/NavHeader'
+import NavMenu from './components/layout/NavMenu'
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <h1>
           <Link to="/">Aplikasi Catatan</Link>
         </h1>
-        <NavHeader />
+        <NavMenu />
       </header>
       <main>
         <Routes>

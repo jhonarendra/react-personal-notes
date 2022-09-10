@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import ThemeToggler from './ThemeToggler'
 
-export default function NavHeader() {
+export default function NavMenu() {
   const { pathname } = useLocation()
   return (
     <nav className="navigation">

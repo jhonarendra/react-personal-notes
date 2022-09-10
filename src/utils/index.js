@@ -3,9 +3,11 @@ const showFormattedDate = (date) => {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
-  };
-  return new Date(date).toLocaleDateString('id-ID', options);
-};
+    day: 'numeric'
+  }
+  return new Date(date).toLocaleDateString('id-ID', options)
+}
 
-export { showFormattedDate };
+const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+
+export { showFormattedDate, capitalizeFirstLetter }

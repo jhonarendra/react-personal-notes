@@ -27,6 +27,7 @@
 
 a {
   color: var(--on-background);
+  text-decoration: none;
 }
 
 

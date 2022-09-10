@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import parser from 'html-react-parser'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { HiArrowLeft } from 'react-icons/hi'
 import { showFormattedDate } from '../../utils'
 import { getNote } from '../../utils/local-data'
 
@@ -13,6 +14,14 @@ export default function NotesIdPages() {
   }, [])
   return (
     <secion className="detail-page">
+      <Link
+        to="/"
+        title="Kembali"
+      >
+        <HiArrowLeft />
+        {' '}
+        Kembali
+      </Link>
       { 'id' in note ? (
         <>
           <h3 className="detail-page__title">

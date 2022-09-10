@@ -139,6 +139,9 @@ main {
   margin-top: 36px;
   font-size: 18px;
 }
+.detail-page__body a {
+  text-decoration: underline;
+}
 
 .detail-page__action, .homepage__action, .add-new-page__action {
   position: fixed;

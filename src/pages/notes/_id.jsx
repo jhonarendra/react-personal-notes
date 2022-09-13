@@ -13,7 +13,7 @@ export default function NotesIdPages() {
     setNote(getNote(id))
   }, [])
   return (
-    <secion className="detail-page">
+    <section className="detail-page">
       <Link
         to="/"
         title="Kembali"
@@ -38,6 +38,6 @@ export default function NotesIdPages() {
         <p>Data tidak ditemukan</p>
       )}
 
-    </secion>
+    </section>
   )
 }

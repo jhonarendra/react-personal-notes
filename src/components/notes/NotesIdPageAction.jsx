@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { HiOutlineTrash } from 'react-icons/hi'
-import { BiArchiveIn } from 'react-icons/bi'
+import { BiArchiveIn, BiArchiveOut } from 'react-icons/bi'
 import PageAction from '../layout/PageAction'
 
-function NotesIdPageAction({ handleArchive, handleDelete }) {
+function NotesIdPageAction({ archived, handleArchive, handleDelete }) {
   return (
     <PageAction page="detail-page">
       <>
         <button
           className="action"
           type="button"
-          title="Arsipkan"
+          title={archived ? 'Aktifkan' : 'Arsipkan'}
           onClick={() => handleArchive()}
         >
-          <BiArchiveIn />
+          {archived ? <BiArchiveOut /> : <BiArchiveIn />}
         </button>
         <button
           className="action"
@@ -30,6 +30,7 @@ function NotesIdPageAction({ handleArchive, handleDelete }) {
 }
 
 NotesIdPageAction.propTypes = {
+  archived: PropTypes.bool.isRequired,
   handleArchive: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired
 }

@@ -3,7 +3,9 @@ import parser from 'html-react-parser'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HiArrowLeft } from 'react-icons/hi'
 import { showFormattedDate } from '../../utils'
-import { archiveNote, deleteNote, getNote } from '../../utils/local-data'
+import {
+  archiveNote, deleteNote, getNote, unarchiveNote
+} from '../../utils/local-data'
 import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
 
 export default function NotesIdPages() {
@@ -12,8 +14,13 @@ export default function NotesIdPages() {
   const navigate = useNavigate()
 
   const handleArchive = () => {
-    archiveNote(id)
-    navigate('/')
+    if (note.archived) {
+      unarchiveNote(id)
+      navigate('/archives')
+    } else {
+      archiveNote(id)
+      navigate('/')
+    }
   }
 
   const handleDelete = () => {
@@ -50,6 +57,7 @@ export default function NotesIdPages() {
         <p>Data tidak ditemukan</p>
       )}
       <NotesIdPageAction
+        archived={note.archived || false}
         handleArchive={handleArchive}
         handleDelete={handleDelete}
       />

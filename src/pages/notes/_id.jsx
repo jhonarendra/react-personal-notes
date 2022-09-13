@@ -13,6 +13,10 @@ export default function NotesIdPages() {
   const { id } = useParams()
   const navigate = useNavigate()
 
+  const handleEdit = () => {
+    navigate(`/notes/${id}/edit`)
+  }
+
   const handleArchive = () => {
     if (note.archived) {
       unarchiveNote(id)
@@ -58,6 +62,7 @@ export default function NotesIdPages() {
       )}
       <NotesIdPageAction
         archived={note.archived || false}
+        handleEdit={handleEdit}
         handleArchive={handleArchive}
         handleDelete={handleDelete}
       />

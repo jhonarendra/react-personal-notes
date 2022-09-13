@@ -9,6 +9,7 @@ import ArchivesPage from './pages/archives'
 import NotesIdPages from './pages/notes/_id'
 import NotesNewPages from './pages/notes/new'
 import NavMenu from './components/layout/NavMenu'
+import NotesIdEditPages from './pages/notes/_id-edit'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/notes" element={<Navigate to="/" replace />} />
           <Route path="/notes/new" element={<NotesNewPages />} />
           <Route path="/notes/:id" element={<NotesIdPages />} />
+          <Route path="/notes/:id/edit" element={<NotesIdEditPages />} />
           <Route path="*" element={<NotFoundPages />} />
         </Routes>
       </main>

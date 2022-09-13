@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import parser from 'html-react-parser'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HiArrowLeft } from 'react-icons/hi'
 import { showFormattedDate } from '../../utils'
-import { getNote } from '../../utils/local-data'
+import { archiveNote, deleteNote, getNote } from '../../utils/local-data'
+import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
 
 export default function NotesIdPages() {
   const [note, setNote] = useState({})
   const { id } = useParams()
+  const navigate = useNavigate()
+
+  const handleArchive = () => {
+    archiveNote(id)
+    navigate('/')
+  }
+
+  const handleDelete = () => {
+    deleteNote(id)
+    navigate('/')
+  }
 
   useEffect(() => {
     setNote(getNote(id))
@@ -37,7 +49,10 @@ export default function NotesIdPages() {
       ) : (
         <p>Data tidak ditemukan</p>
       )}
-
+      <NotesIdPageAction
+        handleArchive={handleArchive}
+        handleDelete={handleDelete}
+      />
     </section>
   )
 }

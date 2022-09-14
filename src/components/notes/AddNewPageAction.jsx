@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { HiX, HiCheck } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import PageAction from '../layout/PageAction'
 
-export default function AddNewPageAction() {
+function AddNewPageAction({ handleSave }) {
   const navigate = useNavigate()
 
   return (
@@ -21,7 +22,7 @@ export default function AddNewPageAction() {
           className="action"
           type="button"
           title="Tambah"
-          onClick={() => navigate('/notes/new')}
+          onClick={() => handleSave()}
         >
           <HiCheck />
         </button>
@@ -29,3 +30,9 @@ export default function AddNewPageAction() {
     </PageAction>
   )
 }
+
+AddNewPageAction.propTypes = {
+  handleSave: PropTypes.func.isRequired
+}
+
+export default AddNewPageAction

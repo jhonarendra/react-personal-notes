@@ -30,6 +30,7 @@ export default function NotesNewPages() {
   }
 
   const handleSave = () => {
+    // TODO: validasi input
     const { title } = form
     const body = draftToHtml(convertToRaw(form.body.getCurrentContent()))
     addNote({ title, body })

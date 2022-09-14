@@ -1,24 +1,41 @@
 import React, { useEffect, useState } from 'react'
-import parser from 'html-react-parser'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { ContentState, convertFromHTML, EditorState } from 'draft-js'
+import { Editor } from 'react-draft-wysiwyg'
 import { HiArrowLeft } from 'react-icons/hi'
-import { showFormattedDate } from '../../utils'
 import {
   archiveNote, deleteNote, getNote, unarchiveNote
 } from '../../utils/local-data'
 import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
 
 export default function NotesIdEditPages() {
-  const [note, setNote] = useState({})
+  const [form, setForm] = useState({
+    id: '',
+    archived: false,
+    title: '',
+    body: EditorState.createWithContent(
+      ContentState.createFromBlockArray(
+        convertFromHTML('<b><i><u>Isi Catatan</u></i></b>')
+      )
+    )
+  })
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setForm((data) => ({ ...data, title: e.target.value }))
+  }
+
+  const onEditorStateChange = (body) => {
+    setForm((data) => ({ ...data, body }))
+  }
 
   const handleEdit = () => {
     navigate(`/notes/${id}/edit`)
   }
 
   const handleArchive = () => {
-    if (note.archived) {
+    if (form.archived) {
       unarchiveNote(id)
       navigate('/archives')
     } else {
@@ -33,10 +50,21 @@ export default function NotesIdEditPages() {
   }
 
   useEffect(() => {
-    setNote(getNote(id))
+    const showNote = getNote(id)
+    const { title, archived, body } = showNote
+    setForm({
+      id,
+      title,
+      archived,
+      body: EditorState.createWithContent(
+        ContentState.createFromBlockArray(
+          convertFromHTML(body)
+        )
+      )
+    })
   }, [])
   return (
-    <section className="detail-page">
+    <section className="edit-page">
       <Link
         to="/"
         title="Kembali"
@@ -45,23 +73,28 @@ export default function NotesIdEditPages() {
         {' '}
         Kembali
       </Link>
-      { 'id' in note ? (
-        <>
-          <h3 className="detail-page__title">
-            { note.title }
-          </h3>
-          <p className="detail-page__createdAt">
-            {showFormattedDate(note.createdAt)}
-          </p>
-          <div className="detail-page__body">
-            { parser(note.body) }
-          </div>
-        </>
+      { form.id !== '' ? (
+        <div className="edit-page__input">
+          <input
+            className="edit-page__input__title"
+            placeholder="Judul"
+            value={form.title}
+            onChange={handleChange}
+          />
+          <Editor
+            editorState={form.body}
+            toolbarClassName="toolbarClassName"
+            wrapperClassName="wrapperClassName"
+            editorClassName="editorClassName"
+            onEditorStateChange={onEditorStateChange}
+          />
+        </div>
       ) : (
         <p>Data tidak ditemukan</p>
       )}
+      {/* TODO: action simpan edit */}
       <NotesIdPageAction
-        archived={note.archived || false}
+        archived={form.archived || false}
         handleEdit={handleEdit}
         handleArchive={handleArchive}
         handleDelete={handleDelete}

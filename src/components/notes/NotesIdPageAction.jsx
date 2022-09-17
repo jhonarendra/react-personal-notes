@@ -30,7 +30,7 @@ function NotesIdPageAction({
         <button
           className="action"
           type="button"
-          title="Tambah"
+          title="Hapus"
           onClick={() => handleDelete()}
         >
           <HiOutlineTrash />

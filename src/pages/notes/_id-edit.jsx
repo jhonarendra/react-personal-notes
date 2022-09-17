@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { ContentState, convertFromHTML, EditorState } from 'draft-js'
+import {
+  ContentState, convertFromHTML, convertToRaw, EditorState
+} from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import { HiArrowLeft } from 'react-icons/hi'
+import draftToHtml from 'draftjs-to-html'
 import {
-  archiveNote, deleteNote, getNote, unarchiveNote
+  editNote,
+  getNote
 } from '../../utils/local-data'
-import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
+import NotesIdEditPageAction from '../../components/notes/NotesIdEditPageAction'
 import NoteListEmpty from '../../components/notes/NoteListEmpty'
 
 export default function NotesIdEditPages() {
@@ -31,23 +35,11 @@ export default function NotesIdEditPages() {
     setForm((data) => ({ ...data, body }))
   }
 
-  const handleEdit = () => {
-    navigate(`/notes/${id}/edit`)
-  }
-
-  const handleArchive = () => {
-    if (form.archived) {
-      unarchiveNote(id)
-      navigate('/archives')
-    } else {
-      archiveNote(id)
-      navigate('/')
-    }
-  }
-
-  const handleDelete = () => {
-    deleteNote(id)
-    navigate('/')
+  const handleSave = () => {
+    const { title } = form
+    const body = draftToHtml(convertToRaw(form.body.getCurrentContent()))
+    editNote({ id, title, body })
+    navigate(`/notes/${id}`)
   }
 
   useEffect(() => {
@@ -96,11 +88,8 @@ export default function NotesIdEditPages() {
         <NoteListEmpty />
       )}
       {/* TODO: action simpan edit */}
-      <NotesIdPageAction
-        archived={form.archived || false}
-        handleEdit={handleEdit}
-        handleArchive={handleArchive}
-        handleDelete={handleDelete}
+      <NotesIdEditPageAction
+        handleSave={handleSave}
       />
     </section>
   )

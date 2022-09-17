@@ -196,6 +196,10 @@ main {
   min-height: 500px;
 }
 
+.rdw-editor-toolbar, .rdw-dropdown-selectedtext {
+  color: #333333;
+}
+
 [data-placeholder]:empty::before {
   content: attr(data-placeholder);
   color: var(--on-background-grey)

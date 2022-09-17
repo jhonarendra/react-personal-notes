@@ -7,6 +7,7 @@ import {
   archiveNote, deleteNote, getNote, unarchiveNote
 } from '../../utils/local-data'
 import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
+import NoteListEmpty from '../../components/notes/NoteListEmpty'
 
 export default function NotesIdEditPages() {
   const [form, setForm] = useState({
@@ -51,17 +52,19 @@ export default function NotesIdEditPages() {
 
   useEffect(() => {
     const showNote = getNote(id)
-    const { title, archived, body } = showNote
-    setForm({
-      id,
-      title,
-      archived,
-      body: EditorState.createWithContent(
-        ContentState.createFromBlockArray(
-          convertFromHTML(body)
+    if (showNote) {
+      const { title, archived, body } = showNote
+      setForm({
+        id,
+        title,
+        archived,
+        body: EditorState.createWithContent(
+          ContentState.createFromBlockArray(
+            convertFromHTML(body)
+          )
         )
-      )
-    })
+      })
+    }
   }, [])
   return (
     <section className="edit-page">
@@ -90,7 +93,7 @@ export default function NotesIdEditPages() {
           />
         </div>
       ) : (
-        <p>Data tidak ditemukan</p>
+        <NoteListEmpty />
       )}
       {/* TODO: action simpan edit */}
       <NotesIdPageAction

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import HomepageAction from '../components/index/HomePageAction'
+import NoteListEmpty from '../components/notes/NoteListEmpty'
 import NotesList from '../components/notes/NotesList'
 import { getArchivedNotes } from '../utils/local-data'
 
@@ -37,7 +38,7 @@ export default function IndexPage() {
         />
       </section>
       {notes.length > 0 && <NotesList notes={notes} />}
-      {notes.length === 0 && <p>Tidak ada catatan</p>}
+      {notes.length === 0 && <NoteListEmpty />}
       <HomepageAction />
     </section>
   )

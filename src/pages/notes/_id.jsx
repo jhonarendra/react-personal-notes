@@ -7,6 +7,7 @@ import {
   archiveNote, deleteNote, getNote, unarchiveNote
 } from '../../utils/local-data'
 import NotesIdPageAction from '../../components/notes/NotesIdPageAction'
+import NotFoundMessage from '../../components/layout/NotFoundMessage'
 
 export default function NotesIdPages() {
   const [note, setNote] = useState({})
@@ -33,20 +34,23 @@ export default function NotesIdPages() {
   }
 
   useEffect(() => {
-    setNote(getNote(id))
+    const showNote = getNote(id)
+    if (showNote) {
+      setNote(showNote)
+    }
   }, [])
   return (
     <section className="detail-page">
-      <Link
-        to="/"
-        title="Kembali"
-      >
-        <HiArrowLeft />
-        {' '}
-        Kembali
-      </Link>
       { 'id' in note ? (
         <>
+          <Link
+            to="/"
+            title="Kembali"
+          >
+            <HiArrowLeft />
+            {' '}
+            Kembali
+          </Link>
           <h3 className="detail-page__title">
             { note.title }
           </h3>
@@ -58,7 +62,7 @@ export default function NotesIdPages() {
           </div>
         </>
       ) : (
-        <p>Data tidak ditemukan</p>
+        <NotFoundMessage />
       )}
       <NotesIdPageAction
         archived={note.archived || false}

@@ -11,7 +11,7 @@ import {
   getNote
 } from '../../utils/local-data'
 import NotesIdEditPageAction from '../../components/notes/NotesIdEditPageAction'
-import NoteListEmpty from '../../components/notes/NoteListEmpty'
+import NotFoundMessage from '../../components/layout/NotFoundMessage'
 
 export default function NotesIdEditPages() {
   const [form, setForm] = useState({
@@ -60,32 +60,34 @@ export default function NotesIdEditPages() {
   }, [])
   return (
     <section className="edit-page">
-      <Link
-        to="/"
-        title="Kembali"
-      >
-        <HiArrowLeft />
-        {' '}
-        Kembali
-      </Link>
       { form.id !== '' ? (
-        <div className="edit-page__input">
-          <input
-            className="edit-page__input__title"
-            placeholder="Judul"
-            value={form.title}
-            onChange={handleChange}
-          />
-          <Editor
-            editorState={form.body}
-            toolbarClassName="toolbarClassName"
-            wrapperClassName="wrapperClassName"
-            editorClassName="editorClassName"
-            onEditorStateChange={onEditorStateChange}
-          />
-        </div>
+        <>
+          <Link
+            to="/"
+            title="Kembali"
+          >
+            <HiArrowLeft />
+            {' '}
+            Kembali
+          </Link>
+          <div className="edit-page__input">
+            <input
+              className="edit-page__input__title"
+              placeholder="Judul"
+              value={form.title}
+              onChange={handleChange}
+            />
+            <Editor
+              editorState={form.body}
+              toolbarClassName="toolbarClassName"
+              wrapperClassName="wrapperClassName"
+              editorClassName="editorClassName"
+              onEditorStateChange={onEditorStateChange}
+            />
+          </div>
+        </>
       ) : (
-        <NoteListEmpty />
+        <NotFoundMessage />
       )}
       {/* TODO: action simpan edit */}
       <NotesIdEditPageAction

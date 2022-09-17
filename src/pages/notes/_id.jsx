@@ -39,6 +39,7 @@ export default function NotesIdPages() {
       setNote(showNote)
     }
   }, [])
+
   return (
     <section className="detail-page">
       { 'id' in note ? (

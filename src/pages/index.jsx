@@ -13,10 +13,6 @@ export default function IndexPage() {
   }
 
   useEffect(() => {
-    setNotes(getActiveNotes())
-  }, [])
-
-  useEffect(() => {
     if (search !== '') {
       setNotes(
         getActiveNotes()

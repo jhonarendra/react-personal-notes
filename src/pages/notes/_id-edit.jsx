@@ -6,10 +6,7 @@ import {
 import { Editor } from 'react-draft-wysiwyg'
 import { HiArrowLeft } from 'react-icons/hi'
 import draftToHtml from 'draftjs-to-html'
-import {
-  editNote,
-  getNote
-} from '../../utils/local-data'
+import { editNote, getNote } from '../../utils/local-data'
 import NotesIdEditPageAction from '../../components/notes/NotesIdEditPageAction'
 import NotFoundMessage from '../../components/layout/NotFoundMessage'
 
@@ -58,6 +55,7 @@ export default function NotesIdEditPages() {
       })
     }
   }, [])
+
   return (
     <section className="edit-page">
       { form.id !== '' ? (
@@ -89,7 +87,7 @@ export default function NotesIdEditPages() {
       ) : (
         <NotFoundMessage />
       )}
-      {/* TODO: action simpan edit */}
+
       <NotesIdEditPageAction
         handleSave={handleSave}
       />

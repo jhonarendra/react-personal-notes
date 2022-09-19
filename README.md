@@ -1,6 +1,9 @@
 # Aplikasi Catatan
 
-Submission kelas [Belajar Fundamental Aplikasi Web dengan React](https://www.dicoding.com/academies/413)
+Submission pertama untuk kelas [Belajar Fundamental Aplikasi Web dengan React](https://www.dicoding.com/academies/413).
+
+## Demo
+https://jhonarendra.github.io/react-personal-notes
 
 ## Screenshot
 
